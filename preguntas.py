@@ -118,9 +118,9 @@ def pregunta_03():
     # Imprima el R^2 del modelo con 4 decimales
     print(____.score(____, ____).round(____))
  """
-      from numpy.core.function_base import linspace
-  from sklearn.linear_model import LinearRegression
-  import numpy as np
+    from numpy.core.function_base import linspace
+    from sklearn.linear_model import LinearRegression
+    import numpy as np
 
     df = pd.read_csv(base_dir +'/gm_2008_region.csv')
 
