@@ -54,7 +54,7 @@ def pregunta_02():
     """
     En este punto se realiza la impresión de algunas estadísticas básicas
     Complete el código presentado a continuación.
-    """
+ 
 
     # Lea el archivo `gm_2008_region.csv` y asignelo al DataFrame `df`
     df = ____
@@ -73,13 +73,19 @@ def pregunta_02():
 
     # Imprima la correlación entre las columnas `GDP` y `life` con 4 decimales.
     print(____)
-
+"""
+    df = pd.read_csv('gm_2008_region.csv')
+    print(df.shape)
+    print(round(float(df['life'].corr(df['fertility'])),4))
+    print(round(float(df['life'].mean()),4))
+    print(type(df['fertility']))
+    print(round(float(df['GDP'].corr(df['life'])),4))
 
 def pregunta_03():
     """
     Entrenamiento del modelo sobre todo el conjunto de datos.
     Complete el código presentado a continuación.
-    """
+    
 
     # Lea el archivo `gm_2008_region.csv` y asignelo al DataFrame `df`
     df = ____
@@ -111,13 +117,31 @@ def pregunta_03():
 
     # Imprima el R^2 del modelo con 4 decimales
     print(____.score(____, ____).round(____))
+ """
+      from numpy.core.function_base import linspace
+  from sklearn.linear_model import LinearRegression
+  import numpy as np
 
+    df = pd.read_csv(base_dir +'/gm_2008_region.csv')
+
+    X_fertility = df['fertility'].to_numpy()[:,np.newaxis]
+    y_life = df['life'].copy().to_numpy()
+
+    reg = LinearRegression()
+
+    prediction_space = np.linspace(X_fertility.min(),X_fertility.max(),139)[:,np.newaxis]
+
+    reg.fit(X_fertility,y_life)
+
+    y_pred = reg.predict(prediction_space)
+
+    print(reg.score(X_fertility,y_life).round(4))
 
 def pregunta_04():
     """
     Particionamiento del conjunto de datos usando train_test_split.
     Complete el código presentado a continuación.
-    """
+   
 
     # Importe LinearRegression
     # Importe train_test_split
@@ -155,3 +179,26 @@ def pregunta_04():
     print("R^2: {:6.4f}".format(linearRegression.score(X_test, y_test)))
     rmse = np.sqrt(____(____, ____))
     print("Root Mean Squared Error: {:6.4f}".format(rmse))
+"""
+    from sklearn.linear_model import LinearRegression
+    from sklearn.model_selection import train_test_split
+    from sklearn.metrics import mean_squared_error
+
+    df = pd.read_csv(base_dir +'/gm_2008_region.csv')
+
+    X_fertility = df['fertility'].to_numpy()[:,np.newaxis]
+    y_life = df['life'].to_numpy()
+
+    (X_train, X_test, y_train, y_test,) = train_test_split(
+                                                 X_fertility,
+                                                 y_life,
+                                                 test_size=0.2,
+                                                 random_state=53,)
+
+    linearRegression = LinearRegression()
+    linearRegression.fit(X_train,y_train)
+    y_pred = linearRegression.predict(X_test)
+
+    print('R^2: {:6.4f}'.format(linearRegression.score(X_test,y_test)))
+    rmse = mean_squared_error(y_test,y_pred, squared = False)
+    print('Root Mean Squared Error: {:6.4f}'.format(rmse))
