@@ -13,7 +13,7 @@ def pregunta_01():
     """
     En este punto se realiza la lectura de conjuntos de datos.
     Complete el código presentado a continuación.
-    """
+  
     # Lea el archivo `gm_2008_region.csv` y asignelo al DataFrame `df`
     df = ____
 
@@ -38,7 +38,17 @@ def pregunta_01():
 
     # Imprima las nuevas dimensiones de `X`
     print(____.____)
+    """
+    df = pd.read_csv('gm_2008_region.csv')
+    y = df['life'].to_numpy()
+    X = df['fertility'].to_numpy()
+    print(y.shape)
+    print(X.shape)
 
+    y_reshaped = y.reshape(-1,1)
+    X_reshaped = x.reshape(-1,1)
+    print(y_reshaped.shape)
+    print(X_reshaped.shape)
 
 def pregunta_02():
     """
