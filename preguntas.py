@@ -122,7 +122,7 @@ def pregunta_03():
     from sklearn.linear_model import LinearRegression
     import numpy as np
 
-    df = pd.read_csv(base_dir +'/gm_2008_region.csv')
+    df = pd.read_csv('gm_2008_region.csv')
 
     X_fertility = df['fertility'].to_numpy()[:,np.newaxis]
     y_life = df['life'].copy().to_numpy()
@@ -184,7 +184,7 @@ def pregunta_04():
     from sklearn.model_selection import train_test_split
     from sklearn.metrics import mean_squared_error
 
-    df = pd.read_csv(base_dir +'/gm_2008_region.csv')
+    df = pd.read_csv('gm_2008_region.csv')
 
     X_fertility = df['fertility'].to_numpy()[:,np.newaxis]
     y_life = df['life'].to_numpy()
